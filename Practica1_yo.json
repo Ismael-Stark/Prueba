@@ -1,0 +1,255 @@
+[
+    {
+        "id": "663f9e82c0ff0c86",
+        "type": "tab",
+        "label": "Practica1Yo",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e1e1e7fdd385c79b",
+        "type": "switch",
+        "z": "663f9e82c0ff0c86",
+        "name": "bandera?",
+        "property": "bandera",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 590,
+        "y": 480,
+        "wires": [
+            [
+                "56f7fc878d2c5882"
+            ],
+            [
+                "4cafa7132397f86d"
+            ]
+        ]
+    },
+    {
+        "id": "4cafa7132397f86d",
+        "type": "change",
+        "z": "663f9e82c0ff0c86",
+        "name": "False",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "bandera",
+                "pt": "flow",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "gauge",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 820,
+        "y": 500,
+        "wires": [
+            [
+                "765e627f3ed6017a",
+                "42638601b080e137"
+            ]
+        ]
+    },
+    {
+        "id": "56f7fc878d2c5882",
+        "type": "change",
+        "z": "663f9e82c0ff0c86",
+        "name": "true",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "bandera",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "gauge",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 810,
+        "y": 440,
+        "wires": [
+            [
+                "765e627f3ed6017a",
+                "42638601b080e137"
+            ]
+        ]
+    },
+    {
+        "id": "765e627f3ed6017a",
+        "type": "ui_text",
+        "z": "663f9e82c0ff0c86",
+        "group": "d87c83e57f6ee848",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 1060,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "7742b0b165b21dca",
+        "type": "ui_button",
+        "z": "663f9e82c0ff0c86",
+        "name": "On/Off",
+        "group": "d87c83e57f6ee848",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "label": "Encender/Apagar",
+        "tooltip": "Encender o Apagar",
+        "color": "white",
+        "bgcolor": "black",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 280,
+        "y": 440,
+        "wires": [
+            [
+                "e1e1e7fdd385c79b"
+            ]
+        ]
+    },
+    {
+        "id": "42638601b080e137",
+        "type": "ui_gauge",
+        "z": "663f9e82c0ff0c86",
+        "name": "",
+        "group": "d87c83e57f6ee848",
+        "order": 2,
+        "width": "6",
+        "height": "6",
+        "gtype": "wave",
+        "title": "gauge",
+        "label": "",
+        "format": "{{gauge}}",
+        "min": "0",
+        "max": "1",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 810,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "97871f102b4423ff",
+        "type": "inject",
+        "z": "663f9e82c0ff0c86",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "2",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "hola",
+        "payloadType": "str",
+        "x": 480,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "59b8241a7c123b89",
+        "type": "function",
+        "z": "663f9e82c0ff0c86",
+        "name": "GlobalVar",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nflow.set(\"bandera\", false);",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d87c83e57f6ee848",
+        "type": "ui_group",
+        "name": "Group 1",
+        "tab": "78a3eca0dabe863f",
+        "order": 1,
+        "disp": true,
+        "width": "10",
+        "collapse": false
+    },
+    {
+        "id": "78a3eca0dabe863f",
+        "type": "ui_tab",
+        "name": "Practicas Yo",
+        "icon": "dashboard",
+        "order": 9,
+        "disabled": false,
+        "hidden": false
+    }
+]
